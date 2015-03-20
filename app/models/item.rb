@@ -130,4 +130,8 @@ class Item < ActiveRecord::Base
   def type_name
     TYPE_NAMES[type_key.to_sym]
   end
+
+  def drops
+    super.order('chance DESC')
+  end
 end
