@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sprite_name: MyString
+  name: MyString
+  j_name: MyString
+  level: 
+
+two:
+  sprite_name: MyString
+  name: MyString
+  j_name: MyString
+  level: 

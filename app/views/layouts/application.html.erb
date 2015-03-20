@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <meta name="description" content="База предметов, монстров, локаций и НПЦ игры Рагнарок. Самая полная, самая удобная и быстрая база. Добавьте ее в закладки и в нужный момент она придет вам на помощь — найдет для вас именно то, что вы ищете. Умеет адаптироваться под рейты разных серверов. Обновляется каждые две недели." />
+  <meta name="keywords" content="ragnarok рагнарок база знаний ро база данных монстры итемы карты локации вещи эквип оружие лут расходка шапки щиты луки кастеты катары ножи мечи" />
+  <link rel="shortcut icon" type="image/png" href="/favicon.png">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="common-wrapper">
+      <header class="common-header">
+        <div class="common-top-spacer">
+          <%= render 'rates' %>
+        </div>
+        <nav class="menu">
+          <div class="menu-item"><%= link_to_unless_current 'Главная', controller: 'common' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Монстры', controller: 'mobs', action: 'index' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Карты', controller: 'items', action: 'index', type: 'cards' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Доспехи', controller: 'items', action: 'index', type: 'armor' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Оружие', controller: 'items', action: 'index', type: 'weapon' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Расходники', controller: 'items', action: 'index', type: 'usable' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Лут', controller: 'items', action: 'index', type: 'ext' %></div>
+          <div class="menu-item"><%= link_to_unless_current 'Локации', controller: 'maps', action: 'index' %></div>
+        </nav>
+        <div class="common-search">
+          <div class="search-wrapper">
+            <input type="text" placeholder="Искать" />
+            <div class="search-reset"></div>
+            <div class="search-results"></div>
+          </div>
+        </div>
+      </header>
+      <article class="common-container">
+        <%= yield %>
+      </article>
+      <footer class="common-footer">
+        <%= render 'footer' %>
+      </footer>
+    </div>
+    <%= render 'application/reformal' %>
+</body>
+</html>

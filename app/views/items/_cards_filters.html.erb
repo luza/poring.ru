@@ -1,0 +1,32 @@
+<div class="filters">
+  <form action="" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="filter">
+      <div class="lbl">Вставляется в</div>
+      <div class="controls">
+        <select name="filters[type]" value="<%= @filters[:type] %>">
+          <option></option>
+          <option value="256">Головной убор</option>
+          <option value="004">Накидку</option>
+          <option value="016">Броню</option>
+          <option value="002">Оружие</option>
+          <option value="032">Щит</option>
+          <option value="064">Обувь</option>
+          <option value="008,128">Аксессуары</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Описание содержит</div>
+      <div class="controls">
+        <input type="text" style="width: 150px;" name="filters[descr_contains]" value="<%= @filters[:descr_contains] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">&nbsp;</div>
+      <button type="submit" name="filters[apply]" value="1">Фильтровать</button>
+      <button type="submit" name="filters[reset]" value="1">Сбросить фильтры</button>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>

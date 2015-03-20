@@ -1,0 +1,29 @@
+<% content_for :title, 'Монстры' %>
+<%= render 'filters' %>
+<div class="div-list mob-list">
+  <% if @mobs.count > 0 %>
+      <% prev_letter = '' %>
+      <% @mobs.each_slice((@mobs.count/4.0).ceil) do |mobsSlice| %>
+          <div class="div-list-col">
+            <% mobsSlice.each_with_index do |mob, idx| %>
+                <% if idx == 0 || mob['j-name'].chars.first != prev_letter %>
+                    <div class="div-list-letter">
+                      <%= mob['j-name'].chars.first %>
+                      <% if idx == 0 && mob['j-name'].chars.first == prev_letter %>
+                          <span>(продолжение)</span>
+                      <% end %>
+                    </div>
+                <% end %>
+                <% prev_letter = mob['j-name'].chars.first %>
+                <div class="div-list-item <%= mob.mode_dec&Mob::MD_BOSS > 0 ? 'boss' : '' %>">
+                  <%= link_to mob['j-name'], controller: 'mobs', action: 'view', id: mob.id %>
+                  <span class="mob-lvl"><%= mob.level %></span>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
+      <div class="clearfix"></div>
+  <% else %>
+      <div class="norecords">Нет результатов.</div>
+  <% end %>
+</div>

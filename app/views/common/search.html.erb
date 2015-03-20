@@ -1,0 +1,38 @@
+<% if @results[:items].present? || @results[:mobs].present? || @results[:maps].present? || @results[:npcs].present? %>
+    <% @results[:items].each do |item| %>
+        <div class="row">
+          <%= render :partial => 'shared/item_icon', :locals => {:item => item} %>
+          <div class="item-title">
+            <%= link_to item.name_with_slot, controller: 'items', action: 'view', id: item.id %>
+          </div>
+        </div>
+    <% end %>
+    <% @results[:mobs].each do |mob| %>
+        <div class="row">
+          <div class="ii mob-icon"></div>
+          <div class="item-title">
+            <%= link_to mob.name, controller: 'mobs', action: 'view', id: mob.id %>
+            <span class="subscript"><%= mob.level %></span>
+          </div>
+        </div>
+    <% end %>
+    <% @results[:maps].each do |map| %>
+        <div class="row">
+          <div class="ii map-icon"></div>
+          <div class="item-title">
+            <%= link_to map.name, controller: 'maps', action: 'view', id: map.id %>
+          </div>
+        </div>
+    <% end %>
+    <% @results[:npcs].each do |npc| %>
+        <div class="row">
+          <div class="ii npc-icon"></div>
+          <div class="item-title">
+            <%= link_to npc.name, controller: 'npcs', action: 'view', id: npc.id %>
+            <%= link_to npc.map.name, { controller: 'maps', action: 'view', id: npc.map.id, hl_npc: npc.id }, { class: 'subscript' } %>
+          </div>
+        </div>
+    <% end %>
+<% else %>
+    <div class="norecords">Поиск не дал результатов.</div>
+<% end %>

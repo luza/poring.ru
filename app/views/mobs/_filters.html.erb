@@ -1,0 +1,279 @@
+<div class="filters">
+  <form action="" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="filter">
+      <div class="lbl">Босс</div>
+      <div class="controls">
+        <select name="filters[is_boss]" value="<%= @filters[:is_boss] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Уровень</div>
+      <div class="controls">
+        <select name="filters[level_comp]" value="<%= @filters[:level_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[level_val]" value="<%= @filters[:level_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Раса</div>
+      <div class="controls">
+        <select name="filters[race]" value="<%= @filters[:race] %>">
+          <option></option>
+          <option value="1">Formless</option>
+          <option value="2">Undead</option>
+          <option value="3">Brute</option>
+          <option value="4">Plant</option>
+          <option value="5">Insect</option>
+          <option value="6">Fish</option>
+          <option value="7">Demon</option>
+          <option value="8">DemiHuman</option>
+          <option value="9">Angel</option>
+          <option value="10">Dragon</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Элемент</div>
+      <div class="controls">
+        <select name="filters[element]" value="<%= @filters[:element] %>">
+          <option></option>
+          <option value="1">Neutral</option>
+          <option value="2">Water</option>
+          <option value="3">Earth</option>
+          <option value="4">Fire</option>
+          <option value="5">Wind</option>
+          <option value="6">Poison</option>
+          <option value="7">Holy</option>
+          <option value="8">Dark</option>
+          <option value="9">Ghost</option>
+          <option value="10">Undead</option>
+        </select>
+        <select name="filters[element_lv]" value="<%= @filters[:element_lv] %>">
+          <option></option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Размер</div>
+      <div class="controls">
+        <select name="filters[size]" value="<%= @filters[:size] %>">
+          <option></option>
+          <option value="1">Маленький</option>
+          <option value="2">Средний</option>
+          <option value="3">Большой</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Base Exp</div>
+      <div class="controls">
+        <select name="filters[bexp_comp]" value="<%= @filters[:bexp_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 50px;" name="filters[bexp_val]" value="<%= @filters[:bexp_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Job Exp</div>
+      <div class="controls">
+        <select name="filters[jexp_comp]" value="<%= @filters[:jexp_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 50px;" name="filters[jexp_val]" value="<%= @filters[:jexp_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">HP</div>
+      <div class="controls">
+        <select name="filters[hp_comp]" value="<%= @filters[:hp_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 50px;" name="filters[hp_val]" value="<%= @filters[:hp_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Атака</div>
+      <div class="controls">
+        <select name="filters[attack_comp]" value="<%= @filters[:attack_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[attack_val]" value="<%= @filters[:attack_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Защита</div>
+      <div class="controls">
+        <select name="filters[def_comp]" value="<%= @filters[:def_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[def_val]" value="<%= @filters[:def_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Маг. защ.</div>
+      <div class="controls">
+        <select name="filters[mdef_comp]" value="<%= @filters[:mdef_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[mdef_val]" value="<%= @filters[:mdef_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">STR</div>
+      <div class="controls">
+        <select name="filters[str_comp]" value="<%= @filters[:str_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[str_val]" value="<%= @filters[:str_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">VIT</div>
+      <div class="controls">
+        <select name="filters[vit_comp]" value="<%= @filters[:vit_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[vit_val]" value="<%= @filters[:vit_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">DEX</div>
+      <div class="controls">
+        <select name="filters[dex_comp]" value="<%= @filters[:dex_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[dex_val]" value="<%= @filters[:dex_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">AGI</div>
+      <div class="controls">
+        <select name="filters[agi_comp]" value="<%= @filters[:agi_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[agi_val]" value="<%= @filters[:agi_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">INT</div>
+      <div class="controls">
+        <select name="filters[int_comp]" value="<%= @filters[:int_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[int_val]" value="<%= @filters[:int_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">LUK</div>
+      <div class="controls">
+        <select name="filters[luk_comp]" value="<%= @filters[:luk_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[luk_val]" value="<%= @filters[:luk_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Не двигается</div>
+      <div class="controls">
+        <select name="filters[is_moving]" value="<%= @filters[:is_moving] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Не атакует</div>
+      <div class="controls">
+        <select name="filters[is_attacking]" value="<%= @filters[:is_attacking] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Агрессивн.</div>
+      <div class="controls">
+        <select name="filters[is_detect_cast]" value="<%= @filters[:is_detect_cast] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Стадный</div>
+      <div class="controls">
+        <select name="filters[is_assist]" value="<%= @filters[:is_assist] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Чует магию</div>
+      <div class="controls">
+        <select name="filters[is_detect_cast]" value="<%= @filters[:is_detect_cast] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Кол-во на карте</div>
+      <div class="controls">
+        <select name="filters[qty_comp]" value="<%= @filters[:qty_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[qty_val]" value="<%= @filters[:qty_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">&nbsp;</div>
+      <button type="submit" name="filters[apply]" value="1">Фильтровать</button>
+      <button type="submit" name="filters[reset]" value="1">Сбросить фильтры</button>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>

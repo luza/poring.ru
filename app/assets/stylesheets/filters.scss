@@ -1,0 +1,22 @@
+.filters {
+    background-color: #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.filters .filter {
+    margin-right: 20px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.filters .filter .lbl {
+    text-align: left;
+    color: grey;
+    font-size: 10px;
+    margin-bottom: 4px;
+}
+
+.filters .filter .controls {
+    text-align: left;
+}

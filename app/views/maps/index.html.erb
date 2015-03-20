@@ -1,0 +1,28 @@
+<% content_for :title, 'Локации' %>
+<%= render 'filters' %>
+<div class="div-list map-list">
+  <% if @maps.count > 0 %>
+      <% prev_letter = '' %>
+      <% @maps.each_slice((@maps.count/4.0).ceil) do |mapsSlice| %>
+          <div class="div-list-col">
+            <% mapsSlice.each_with_index do |map, idx| %>
+                <% if idx == 0 || map.name.chars.first != prev_letter %>
+                    <div class="div-list-letter">
+                      <%= map.name.chars.first.upcase %>
+                      <% if idx == 0 && map.name.chars.first == prev_letter %>
+                          <span>(продолжение)</span>
+                      <% end %>
+                    </div>
+                <% end %>
+                <% prev_letter = map.name.chars.first %>
+                <div class="div-list-item">
+                  <%= link_to map.name, controller: 'maps', action: 'view', id: map.id %>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
+      <div class="clearfix"></div>
+  <% else %>
+      <div class="norecords">Нет результатов.</div>
+  <% end %>
+</div>

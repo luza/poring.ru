@@ -1,0 +1,91 @@
+<% content_for :title, 'НПЦ ' + @npc.name %>
+<div class="div-details details-npc">
+  <div class="breadcrumbs">
+    <%= link_to 'Локации', controller: 'maps' %> &rarr;
+    <%= link_to @npc.map.name, controller: 'maps', action: 'view', id: @npc.map.id %> &rarr;
+    <h1><%= @npc.name? %></h1>
+  </div>
+  <div class="image">
+    <% if @npc.sprite <= 0 || @npc.sprite == 111 %>
+        <em>Невидимый</em>
+    <% else %>
+        <img src="/images/npc/<%= @npc.sprite %>.gif" alt="<%= @npc.name %>"/>
+    <% end %>
+  </div>
+  <div class="attributes">
+    <% if @npc.name != '' %>
+        <div class="row extrapad">
+          <span class="lbl">Имя:</span>
+          <span class="value" style="width: 450px;"><%= @npc.name %></span>
+        </div>
+    <% end %>
+    <div class="row">
+      <span class="lbl">Локация:</span>
+    <span class="value">
+      <%= link_to @npc.map.name, controller: 'maps', action: 'view', id: @npc.map.id, hl_npc: @npc.id %>
+    </span>
+    </div>
+    <div class="row">
+      <span class="lbl">Координаты:</span>
+      <span class="value"><%= @npc.x %>, <%= @npc.y %></span>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="div-details details-shop">
+  <% if @npc.shops.present? %>
+      <h3>Предметы на продажу:</h3>
+      <table class="tbl">
+        <thead>
+        <tr>
+          <td>#</td>
+          <td width="200">Название</td>
+          <td width="70">Цена</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @npc.shops.each do |shop| %>
+            <tr>
+              <td><%= render :partial => 'shared/item_icon', :locals => {:item => shop.item} %></td>
+              <td><%= link_to shop.item.name_with_slot, controller: 'items', action: 'view', id: shop.item.id %></td>
+              <td class="text-center"><%= shop.price >= 0 ? shop.price : shop.item.price %> z.</td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
+
+<div class="div-details details-npc">
+  <% if @npc.npc_items.present? %>
+      <h3>Манипуляции с предметами:</h3>
+      <table class="tbl">
+        <thead>
+        <tr>
+          <td>#</td>
+          <td width="200">Название</td>
+          <td></td>
+          <td width="70">Количество</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @npc.npc_items.each do |npc_item| %>
+            <tr>
+              <td><%= render :partial => 'shared/item_icon', :locals => {:item => npc_item.item} %></td>
+              <td><%= link_to npc_item.item.name_with_slot, controller: 'items', action: 'view', id: npc_item.item.id %></td>
+              <td>
+                <% if npc_item.type == 'get' %>
+                    <img height="24" width="24" src="/images/bullet_add.png" title="Отдает"/>
+                <% elsif npc_item.type == 'del' %>
+                    <img height="24" width="24" src="/images/bullet_delete.png" title="Забирает"/>
+                <% end %>
+              </td>
+              <td class="text-center"><%= npc_item.amount %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
+<%= render 'shared/disqus' %>

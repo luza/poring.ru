@@ -1,0 +1,138 @@
+<div class="filters">
+  <form action="" method="post">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="filter">
+      <div class="lbl">Тип</div>
+      <div class="controls">
+        <select name="filters[type]" value="<%= @filters[:type] %>">
+          <option></option>
+          <option value="256">Шапки</option>
+          <option value="512">На глаза</option>
+          <option value="001">В рот</option>
+          <option value="004">Накидки</option>
+          <option value="016">Брони</option>
+          <option value="032">Щиты</option>
+          <option value="064">Обувь</option>
+          <option value="008,128">Аксессуары</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Профессия</div>
+      <div class="controls">
+        <select name="filters[class]" value="<%= @filters[:class] %>">
+          <option></option>
+          <option value="0,0x00000001">Novice, Super Novice</option>
+          <optgroup label="1st Classes">
+            <option value="0,0x00000002">Swordman</option>
+            <option value="0,0x00000004">Mage</option>
+            <option value="0,0x00000008">Archer</option>
+            <option value="0,0x00000010">Acolyte</option>
+            <option value="0,0x00000020">Merchant</option>
+            <option value="0,0x00000040">Thief</option>
+          </optgroup>
+          <optgroup label="2nd Classes">
+            <option value="0,0x00000080">Knight</option>
+            <option value="0,0x00000100">Priest</option>
+            <option value="0,0x00000200">Wizard</option>
+            <option value="0,0x00000400">Blacksmith</option>
+            <option value="0,0x00000800">Hunter</option>
+            <option value="0,0x00001000">Assassin</option>
+            <option value="0,0x00004000">Crusader</option>
+            <option value="0,0x00008000">Monk</option>
+            <option value="0,0x00010000">Sage</option>
+            <option value="0,0x00020000">Rogue</option>
+            <option value="0,0x00040000">Alchemist</option>
+            <option value="0,0x00080000">Bard/Dancer</option>
+          </optgroup>
+          <optgroup label="Advanced Classes">
+            <option value="1,0x00000080">Lord Knight</option>
+            <option value="1,0x00000100">High Priest</option>
+            <option value="1,0x00000200">High Wizard</option>
+            <option value="1,0x00000400">Whitesmith</option>
+            <option value="1,0x00000800">Sniper</option>
+            <option value="1,0x00001000">Assassin Cross</option>
+            <option value="1,0x00004000">Paladin</option>
+            <option value="1,0x00008000">Champion</option>
+            <option value="1,0x00010000">Professor</option>
+            <option value="1,0x00020000">Stalker</option>
+            <option value="1,0x00040000">Creator</option>
+            <option value="1,0x00080000">Clown/Gipsy</option>
+          </optgroup>
+          <optgroup label="Expanded Classes">
+            <option value="0,0x00200000">Taekwon, Taekwon Master</option>
+            <option value="0,0x00400000">StarGladiator</option>
+            <option value="0,0x00800000">Soul Linker</option>
+            <option value="0,0x01000000">Gunslinger</option>
+            <option value="0,0x02000000">Ninja</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Мин. уров.</div>
+      <div class="controls">
+        <select name="filters[min_level_comp]" value="<%= @filters[:min_level_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[min_level_val]" value="<%= @filters[:min_level_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Защита</div>
+      <div class="controls">
+        <select name="filters[def_comp]" value="<%= @filters[:def_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[def_val]" value="<%= @filters[:def_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Вес</div>
+      <div class="controls">
+        <select name="filters[weight_comp]" value="<%= @filters[:weight_comp] %>">
+          <option value="eq">=</option>
+          <option value="gt">&gt;</option>
+          <option value="lt">&lt;</option>
+        </select>
+        <input type="text" style="width: 30px;" name="filters[weight_val]" value="<%= @filters[:weight_val] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Точится ли</div>
+      <div class="controls">
+        <select name="filters[refinable]" value="<%= @filters[:refinable] %>">
+          <option></option>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Есть слот</div>
+      <div class="controls">
+        <select name="filters[slot]" value="<%= @filters[:slot] %>">
+          <option></option>
+          <option value="0">Нет</option>
+          <option value="1">Да</option>
+        </select>
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">Описание содержит</div>
+      <div class="controls">
+        <input type="text" style="width: 150px;" name="filters[descr_contains]" value="<%= @filters[:descr_contains] %>" />
+      </div>
+    </div>
+    <div class="filter">
+      <div class="lbl">&nbsp;</div>
+      <button type="submit" name="filters[apply]" value="1">Фильтровать</button>
+      <button type="submit" name="filters[reset]" value="1">Сбросить фильтры</button>
+    </div>
+  </form>
+  <div class="clearfix"></div>
+</div>

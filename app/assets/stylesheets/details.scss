@@ -1,0 +1,101 @@
+.div-details .image {
+  float: left;
+  width: 300px;
+  height: 300px;
+  border: 1px dashed #DDD;
+  text-align: center;
+  line-height: 300px;
+}
+
+.div-details .image img {
+  vertical-align: middle;
+}
+
+.div-details .attributes {
+  float: left;
+  margin-left: 20px;
+}
+
+.div-details .attributes .row {
+  margin-bottom: 5px;
+}
+
+.div-details .attributes .row.extrapad {
+  margin-bottom: 15px;
+}
+
+.div-details .attributes .row span {
+  display: inline-block;
+}
+
+.div-details .attributes .row .lbl {
+  text-align: right;
+  width: 100px;
+  float: left;
+}
+
+.div-details .attributes .row .value {
+  width: 80px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.div-details .attributes .row .value.lt100 {
+  color: red;
+}
+
+.div-details .attributes .row .value.gt100 {
+  color: green;
+}
+
+.div-details .attributes .row .value.script {
+  font-weight: normal;
+  font-family: monospace;
+  width: 450px;
+}
+
+.div-details .attributes .row .value.descr {
+  margin-left: 10px;
+  width: 450px;
+  line-height: 16px;
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.div-details .attributes .row .value div {
+  white-space: nowrap;
+}
+
+.tbl {
+  border-spacing: 1px;
+  border: 1px solid #aaa;
+}
+
+.tbl td {
+  padding: 4px;
+  vertical-align: middle;
+}
+
+.tbl thead td {
+  color: #FFFFFF;
+  background-color: #77AED3;
+  text-align: center;
+  padding: 5px;
+}
+
+.tbl tbody td {
+  border: 1px solid #eee;
+}
+
+.breadcrumbs {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.breadcrumbs h1 {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0;
+  display: inline;
+}

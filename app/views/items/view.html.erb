@@ -1,0 +1,263 @@
+<% content_for :title, @item.name_with_slot %>
+<div class="div-details details-item">
+  <div class="breadcrumbs">
+    <%= link_to @item.type_name, controller: 'items', action: 'index', type: @item.type_key %>
+    &rarr; <h1><%= @item.name_with_slot %></h1>
+  </div>
+  <div class="image">
+    <% if @item.type == 6 %>
+        <img src="/images/cards/<%= @item.id %>.gif" alt="<%= @item.title %>"/>
+    <% else %>
+        <img src="/images/items/<%= @item.id %>.png" alt="<%= @item.title %>"/>
+    <% end %>
+  </div>
+  <div class="attributes">
+    <div class="row extrapad">
+      <span class="lbl">ID:</span>
+      <span class="value"><%= @item.id %></span>
+    </div>
+    <% if @item.type == 4 && @item.atk.present? %>
+        <div class="row">
+          <span class="lbl">Атака:</span>
+          <span class="value"><%= @item.atk %></span>
+        </div>
+    <% end %>
+    <% if @item.type.in?([4, 5]) && @item.def > 0 %>
+        <div class="row">
+          <span class="lbl">Защита:</span>
+          <span class="value"><%= @item.def %></span>
+        </div>
+    <% end %>
+    <% if @item.type == 4 && @item.range.present? %>
+        <div class="row">
+          <span class="lbl">Дальность:</span>
+          <span class="value"><%= @item.range %></span>
+        </div>
+    <% end %>
+    <% if @item.type == 4 && @item['wLV'].present? %>
+        <div class="row">
+          <span class="lbl">Уровень:</span>
+        <span class="value">
+          <% if @item['wLV'] == 1 %>I
+          <% elsif @item['wLV'] == 2 %>II
+          <% elsif @item['wLV'] == 3 %>III
+          <% else %>IV
+          <% end %>
+        </span>
+        </div>
+    <% end %>
+    <% if @item.type.in?([4, 5, 6]) %>
+        <div class="row">
+        <span class="lbl">
+          <% if @item.type == 6 %>
+              Вставляется в:
+          <% else %>
+              Занимает слот:
+          <% end %>
+        </span>
+        <span class="value">
+          <% if @item.loc&256 > 0 %><div>Верх головы</div><% end %>
+          <% if @item.loc&512 > 0 %><div>Глаза</div><% end %>
+          <% if @item.loc&1 > 0 %><div>Низ головы</div><% end %>
+          <% if @item.loc&16 > 0 %><div>Одежда</div><% end %>
+          <% if @item.loc&2 > 0 %><div>Оружие</div><% end %>
+          <% if @item.loc&32 > 0 %><div>Щит</div><% end %>
+          <% if @item.loc&4 > 0 %><div>Накидка</div><% end %>
+          <% if @item.loc&64 > 0 %><div>Обувь</div><% end %>
+          <% if @item.loc&8 > 0 || @item.loc&128 > 0 %><div>Аксессуар</div><% end %>
+          <% if @item.loc&32768 > 0 %><div>Патроны</div><% end %>
+        </span>
+        </div>
+    <% end %>
+    <% if @item.type.in?([4, 5]) %>
+        <div class="row">
+          <span class="lbl">Точится:</span>
+          <span class="value"><% if @item.refinable > 0 %>Да<% else %>Нет<% end %></span>
+        </div>
+    <% end %>
+    <div class="row extrapad">
+      <span class="lbl">Вес:</span>
+      <span class="value"><%= @item.weight/10 %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Покупка:</span>
+        <span class="value">
+          <% if @item.price > 0 %>
+            <%= @item.price %> z.
+          <% elsif @item.sell.present? %>
+            <%= @item.sell*2 %> z.
+          <% else %>
+            &mdash;
+          <% end %>
+        </span>
+    </div>
+    <div class="row extrapad">
+      <span class="lbl">Продажа:</span>
+        <span class="value">
+          <% if @item.sell > 0 %>
+            <%= @item.sell %> z.
+          <% elsif @item.price.present? %>
+            <%= (@item.price / 2.0).floor %> z.
+          <% else %>
+            &mdash;
+          <% end %>
+        </span>
+    </div>
+    <% if @item.type.in?([0, 4, 5]) %>
+        <div class="row">
+          <span class="lbl">Класс:</span>
+            <span class="value">
+              <% if @item.upper == 7 %>
+                  Любой
+              <% else %>
+                <% if @item.upper&1 %>
+                  Обычные
+                <% elsif @item.upper&2 %>
+                  Адвансы
+                <% elsif @item.upper&4 %>
+                  Беби
+                <% end %>
+              <% end %>
+          </span>
+        </div>
+        <div class="row">
+          <span class="lbl">Пол:</span>
+            <span class="value">
+                <% if @item.gender == 2 %>
+                  Любой
+                <% elsif @item.gender == 0 %>
+                  На женщин
+                <% elsif @item.gender == 1 %>
+                  На мужчин
+                <% end %>
+            </span>
+        </div>
+        <% if @item['eLV'] > 1 %>
+            <div class="row">
+              <span class="lbl">Мин. уровень:</span>
+              <span class="value"><%= @item['eLV'] %></span>
+            </div>
+        <% end %>
+        <div class="row extrapad">
+          <span class="lbl">Профессии:</span>
+          <span class="value" style="width: 450px;"><%= @item.jobs %></span>
+        </div>
+    <% end %>
+    <% if @item['use-script'].present? && @item['use-script'].length > 2 %>
+        <div class="row">
+          <span class="lbl">Использование:</span>
+          <span class="value script"><%= @item['use-script'] %></span>
+        </div>
+    <% end %>
+    <% if @item['equip-script'].present? && @item['equip-script'].length > 2 %>
+        <div class="row">
+          <span class="lbl">Надевание:</span>
+          <span class="value script"><%= @item['equip-script'] %></span>
+        </div>
+    <% end %>
+    <% if @item['unequip-script'].present? && @item['unequip-script'].length > 2 %>
+        <div class="row">
+          <span class="lbl">Снятие:</span>
+          <span class="value script"><%= @item['unequip-script'] %></span>
+        </div>
+    <% end %>
+    <div class="row" style="margin-top: 10px;">
+      <span class="lbl">Описание:</span>
+        <span class="value descr">
+          <%= @item.item_desc ? @item.item_desc.desc : 'Об этом предмете информации нет.' %>
+        </span>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="div-details details-drop">
+  <% if @item.drops.present? %>
+      <h3>Выпадает из монстров:</h3>
+      <table class="tbl tbl-drop">
+        <thead>
+        <tr>
+          <td width="200">Монстр</td>
+          <td width="50">Уровень</td>
+          <td width="70">Шанс</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @item.drops.each do |drop| %>
+            <tr>
+              <td><%= link_to drop.mob.name, controller: 'mobs', action: 'view', id: drop.mob.id %></td>
+              <td class="text-center"><%= drop.mob.level %></td>
+              <td class="text-center nowrap">
+                <abbr title="<%= drop_fraction(drop.chance/100.0) %>&times;<%= drop_rate %>">
+                  <%= drop_fraction(apply_drop_rate(drop.chance/100.0)) %> %
+                </abbr>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <div class="norecords">Предмет ни из кого не выпадает.</div>
+  <% end %>
+</div>
+
+<div class="div-details details-shop">
+  <% if @item.shops.present? %>
+      <h3>Магазины:</h3>
+      <table class="tbl tbl-shops">
+        <thead>
+        <tr>
+          <td width="150">НПЦ</td>
+          <td width="100">Локация</td>
+          <td width="100">Координаты</td>
+          <td width="70">Цена</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @item.shops.each do |shop| %>
+            <tr>
+              <td><%= link_to shop.npc.name?, controller: 'npcs', action: 'view', id: shop.npc.id %></td>
+              <td><%= link_to shop.npc.map.name, controller: 'maps', action: 'view', id: shop.npc.map.id, hl_npc: shop.npc.id %></td>
+              <td class="text-center"><%= shop.npc.x %>, <%= shop.npc.y %></td>
+              <td class="text-center"><%= shop.price >= 0 ? shop.price : @item['price'] %> z.</td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
+
+<div class="div-details details-npc">
+  <% if @item.npc_items.present? %>
+      <h3>Используется у НПЦ:</h3>
+      <table class="tbl tbl-npc">
+        <thead>
+        <tr>
+          <td width="150">НПЦ</td>
+          <td width="100">Локация</td>
+          <td width="100">Координаты</td>
+          <td></td>
+          <td width="70">Количество</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @item.npc_items.each do |npc_item| %>
+            <tr>
+              <td><%= link_to npc_item.npc.name?, controller: 'npcs', action: 'view', id: npc_item.npc.id %></td>
+              <td><%= link_to npc_item.npc.map.name, controller: 'maps', action: 'view', id: npc_item.npc.map.id, hl_npc: npc_item.npc.id %></td>
+              <td class="text-center"><%= npc_item.npc.x %>, <%= npc_item.npc.y %></td>
+              <td>
+                <% if npc_item.type == 'get' %>
+                    <img height="24" width="24" src="/images/bullet_add.png" title="Отдает"/>
+                <% elsif npc_item.type == 'del' %>
+                    <img height="24" width="24" src="/images/bullet_delete.png" title="Забирает"/>
+                <% end %>
+              </td>
+              <td class="text-center"><%= npc_item.amount %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
+</div>
+<%= render 'shared/disqus' %>

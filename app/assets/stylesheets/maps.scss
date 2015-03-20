@@ -1,0 +1,76 @@
+.details-map .noimage {
+  font-style: italic;
+  margin: 10px;
+}
+
+.details-map .map-image {
+  margin-bottom: 10px;
+  float: left;
+  width: 384px;
+  height: 384px;
+  background-color: grey;
+}
+
+.details-map .map-image .box {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: blue;
+  color: blue;
+  border: 1px solid white;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.details-map .map-image .box.warp {
+  background-color: red;
+  height: 5px;
+  width: 5px;
+  color: red;
+}
+
+.details-map .map-image .box.shop {
+  background-color: black;
+  color: black;
+}
+
+.details-map .map-image a.hl .box,
+.details-map .map-image a:hover .box {
+  height: 18px;
+  line-height: 18px;
+  width: auto;
+  color: white;
+  padding: 0 5px 0 15px;
+  z-index: 2;
+  background-image: url(/images/corner.png);
+  background-repeat: no-repeat;
+  background-position: 1px 1px;
+}
+
+.details-map .npc-list {
+  margin-left: 404px;
+}
+
+.details-map .npc-list .row {
+  float: left;
+  width: 170px;
+  overflow: hidden;
+  margin-left: 10px;
+  padding: 2px 0 2px 0;
+}
+
+.details-map .npc-list .row .box {
+  float: left;
+  width: 5px;
+  height: 5px;
+  margin-top: 6px;
+  background-color: blue;
+}
+
+.details-map .npc-list .row .box.shop {
+  background-color: black;
+}
+
+.details-map .npc-list .row .name {
+  margin-left: 8px;
+}

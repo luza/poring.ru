@@ -1,0 +1,83 @@
+<% content_for :title, @map.name %>
+<div class="div-details details-map">
+  <div class="breadcrumbs">
+    <%= link_to 'Локации', controller: 'maps' %>
+    &rarr; <h1><%= @map.name %></h1>
+  </div>
+  <div class="map-image">
+    <div id="line" style="display: none;"></div>
+    <% @map.npcs.each do |npc| %>
+        <a href="/npc/<%= npc.id %>.html" class="npc-box" data-npc-id="<%= npc.id %>">
+          <div class="box <%= npc.shops.present? ? 'shop' : '' %>" style="margin-top: <%= npc.ptr_y-1 %>px; margin-left: <%= npc.ptr_x-1 %>px;">
+            <%= npc.shops.present? ? '[Shop]' : '' %>
+            <%= npc.name? %> | <%= npc.x %>, <%= npc.y %>
+          </div>
+        </a>
+        <% if @map.hl_npc == npc.id %>
+            <img src="/images/pointer.gif" width="7" height="7" style="position: absolute; margin-top: <%= npc.ptr_y-8 %>px; margin-left: <%= npc.ptr_x+3 %>px;" />
+        <% end %>
+    <% end %>
+    <% @map.warps.each do |warp| %>
+        <a href="/maps/<%= warp.dest_map.id %>.html?x=<%= warp.dest_x %>&y=<%= warp.dest_y %>">
+          <div class="box warp" style="margin-top: <%= warp.ptr_y-2 %>px; margin-left: <%= warp.ptr_x-2 %>px;">
+            [Warp] <%= warp.dest_map.name %> | <%= warp.dest_x %>, <%= warp.dest_y %>
+          </div>
+        </a>
+    <% end %>
+    <% if @current_pos.present? %>
+        <img src="/images/that_is_you.gif" width="8" height="10" style="position: absolute; margin-top: <%= @current_pos[:y]-5 %>px; margin-left: <%= @current_pos[:x]-4 %>px;" title="Вы здесь (<%= @current_pos[:x] %>, <%= @current_pos[:y] %>)" />
+    <% end %>
+    <% if @map.img? %>
+        <img src="/images/maps384/<%= @map.name %>.gif" alt="<%= @map.name %>" />
+    <% else %>
+        <div class="noimage">Нет изображения для этой локации, извините.</div>
+    <% end %>
+  </div>
+  <div class="npc-list">
+    <% @map.npcs.each do |npc| %>
+        <div class="row" data-npc-id="<%= npc.id %>">
+          <div class="box <%= npc.shops.present? ? 'shop' : '' %>"></div>
+          <span class="name">
+            <%= link_to npc.name?, { controller: 'npcs', action: 'view', id: npc.id }, { title: "#{npc.x}, #{npc.y}" } %>
+          </span>
+        </div>
+    <% end %>
+  </div>
+  <div style="clear: both;"></div>
+</div>
+
+<div class="div-details details-spawn">
+  <% if @map.spawns.present? %>
+      <h3>Монстры на этой локации:</h3>
+      <table class="tbl">
+        <thead>
+        <tr>
+          <td width="200">Монстр</td>
+          <td width="50">Кол-во</td>
+          <td width="150">Время перерождения</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @map.spawns.each do |spawn| %>
+            <tr>
+              <td><%= link_to spawn.mob.name, controller: 'mobs', action: 'view', id: spawn.mob.id %></td>
+              <td class="text-center"><%= spawn.count %></td>
+              <td class="text-center nowrap">
+                <% if spawn['max-time'] == 0 %>
+                    Сразу
+                <% elsif spawn['min-time'] == spawn['max-time'] %>
+                    <%= spawn.min_time_mins %> мин.
+                <% else %>
+                    <%= spawn.max_time_mins %> ~
+                    <%= spawn.min_time_mins %> мин.
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <div class="norecords">На карте не водится ни одного монстра.</div>
+  <% end %>
+</div>
+<%= render 'shared/disqus' %>

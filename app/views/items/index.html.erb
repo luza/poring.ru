@@ -1,0 +1,29 @@
+<% content_for :title, Item::TYPE_NAMES[@type_key.to_sym] %>
+<%= render @type_key + '_filters' %>
+<div class="div-list items-list">
+  <% if @items.count > 0 %>
+      <% prev_letter = '' %>
+      <% @items.each_slice((@items.count/4.0).ceil) do |itemsSlice| %>
+          <div class="div-list-col">
+            <% itemsSlice.each_with_index do |item, idx| %>
+                <% if idx == 0 || item.title.chars.first != prev_letter %>
+                    <div class="div-list-letter">
+                      <%= item.title.chars.first %>
+                      <% if idx == 0 && item.title.chars.first == prev_letter %>
+                          <span>(продолжение)</span>
+                      <% end %>
+                    </div>
+                <% end %>
+                <% prev_letter = item.title.chars.first %>
+                <div class="div-list-item">
+                  <%= render :partial => 'shared/item_icon', :locals => { :item => item } %>
+                  <%= link_to item.name_with_slot, controller: 'items', action: 'view', id: item.id %>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
+      <div class="clearfix"></div>
+  <% else %>
+      <div class="norecords">Нет результатов.</div>
+  <% end %>
+</div>

@@ -1,0 +1,216 @@
+<% content_for :title, @mob.name %>
+<div class="div-details details-mob">
+  <div class="breadcrumbs">
+    <%= link_to 'Монстры', controller: 'mobs' %>
+    &rarr; <h1><%= @mob.name %></h1>
+  </div>
+  <div class="image">
+    <img src="/images/mob/<%= @mob.id %>.gif" alt="<%= @mob.name %>"/>
+  </div>
+  <div class="attributes">
+    <div class="row extrapad">
+      <span class="lbl">ID:</span>
+      <span class="value"><%= @mob.id %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Уровень:</span>
+      <span class="value"><%= @mob.level %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Раса:</span>
+      <span class="value"><%= @mob.race_name %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Элемент:</span>
+      <span class="value"><%= @mob.element_name %> <%= @mob.element_level %></span>
+    </div>
+    <div class="row extrapad">
+      <span class="lbl">Размер:</span>
+      <span class="value">
+        <% if @mob.scale == 2 %>
+            Большой
+        <% elsif @mob.scale == 1 %>
+            Средний
+        <% else %>
+            Маленький
+        <% end %>
+      </span>
+    </div>
+    <div class="row">
+      <span class="lbl">Base EXP:</span>
+      <span class="value">
+        <abbr title="<%= @mob['base-exp'] %>&times;<%= base_rate %>">
+          <%= apply_base_rate(@mob['base-exp']) %>
+        </abbr>
+      </span>
+    </div>
+    <div class="row extrapad">
+      <span class="lbl">Job EXP:</span>
+      <span class="value">
+        <abbr title="<%= @mob['job-exp'] %>&times;<%= job_rate %>">
+          <%= apply_job_rate(@mob['job-exp']) %>
+        </abbr>
+      </span>
+    </div>
+    <div class="row">
+      <span class="lbl">HP:</span>
+      <span class="value"><%= @mob.hp %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">SP:</span>
+      <span class="value"><%= @mob.sp %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Атака:</span>
+      <span class="value"><%= @mob['min-atk'] %>~<%= @mob['max-atk'] %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Защита:</span>
+      <span class="value"><%= @mob.defence %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">Маг. защита:</span>
+      <span class="value"><%= @mob['m-defence'] %></span>
+    </div>
+    <% if @mob.mode&Mob::MD_CANMOVE > 0 %>
+        <div class="row extrapad">
+          <span class="lbl">Скорость:</span>
+          <span class="value"><%= @mob.speed %></span>
+        </div>
+    <% end %>
+    <div class="row">
+      <span class="lbl">Особенности:</span>
+      <span class="value nowrap">
+        <% if @mob.mode&Mob::MD_CANMOVE == 0 %><div>Не двигается</div><% end %>
+        <% if @mob.mode&Mob::MD_LOOTER > 0 %><div>Лутер</div><% end %>
+        <% if @mob.mode&Mob::MD_AGGRESSIVE > 0 %><div>Агрессивный</div><% end %>
+        <% if @mob.mode&Mob::MD_ASSIST > 0 %><div>Стадный</div><% end %>
+        <% if @mob.mode&Mob::MD_CASTSENSOR_IDLE > 0 %><div>Чует магию</div><% end %>
+        <% if @mob.mode&Mob::MD_BOSS > 0 %><div>Босс</div><% end %>
+        <% if @mob.mode&Mob::MD_CANATTACK == 0 %><div>Не атакует</div><% end %>
+      </span>
+    </div>
+  </div>
+  <div class="attributes">
+    <div class="row">
+      <span class="lbl">STR:</span>
+      <span class="value"><%= @mob['STR'] %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">VIT:</span>
+      <span class="value"><%= @mob['VIT'] %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">DEX:</span>
+      <span class="value"><%= @mob['DEX'] %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">AGI:</span>
+      <span class="value"><%= @mob['AGI'] %></span>
+    </div>
+    <div class="row">
+      <span class="lbl">INT:</span>
+      <span class="value"><%= @mob['INT'] %></span>
+    </div>
+    <div class="row extrapad">
+      <span class="lbl">LUK:</span>
+      <span class="value"><%= @mob['LUK'] %></span>
+    </div>
+    <% Mob::ELEMENTS[@mob.element].each_with_index do |elv, el| %>
+        <div class="row">
+          <% case el %>
+          <% when 0 %>
+              <span class="lbl">Neutral:</span>
+          <% when 1 %>
+              <span class="lbl">Water:</span>
+          <% when 2 %>
+              <span class="lbl">Earth:</span>
+          <% when 3 %>
+              <span class="lbl">Fire:</span>
+          <% when 4 %>
+              <span class="lbl">Wind:</span>
+          <% when 5 %>
+              <span class="lbl">Poison:</span>
+          <% when 6 %>
+              <span class="lbl">Holy:</span>
+          <% when 7 %>
+              <span class="lbl">Dark:</span>
+          <% when 8 %>
+              <span class="lbl">Ghost:</span>
+          <% else %>
+              <span class="lbl">Undead:</span>
+          <% end %>
+          <span class="value nowrap <%= case when elv < 100 then 'lt100' when elv > 100 then 'gt100' else 'eq100' end %>">
+            <%= elv %> %
+          </span>
+        </div>
+    <% end %>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="div-details details-drop">
+  <% if @mob.drops.present? %>
+      <h3>Вещи из монстра:</h3>
+      <table class="tbl">
+        <thead>
+        <tr>
+          <td>#</td>
+          <td width="200">Название</td>
+          <td width="50">Шанс</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @mob.drops.each do |drop| %>
+            <tr>
+              <td><%= render :partial => 'shared/item_icon', :locals => { :item => drop.item } %></td>
+              <td><%= link_to drop.item.name_with_slot, controller: 'items', action: 'view', id: drop.item.id %></td>
+              <td class="text-center nowrap">
+                <abbr title="<%= drop_fraction(drop.chance/100.0) %>&times;<%= drop_rate %>">
+                  <%= drop_fraction(apply_drop_rate(drop.chance/100.0)) %> %
+                </abbr>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <div class="norecords">Из монстра ничего не выпадает.</div>
+  <% end %>
+</div>
+
+<div class="div-details details-spawn">
+  <% if @mob.spawns.present? %>
+      <h3>Места обитания:</h3>
+      <table class="tbl">
+        <thead>
+        <tr>
+          <td width="150">Локация</td>
+          <td width="50">Кол-во</td>
+          <td width="150">Время перерождения</td>
+        </tr>
+        </thead>
+        <tbody>
+        <% @mob.spawns.each do |spawn| %>
+            <tr>
+              <td><%= link_to spawn.map.name, controller: 'maps', action: 'view', id: spawn.map.id %></td>
+              <td class="text-center"><%= spawn.count %></td>
+              <td class="text-center nowrap">
+                <% if spawn['max-time'] == 0 %>
+                    Сразу
+                <% elsif spawn['min-time'] == spawn['max-time'] %>
+                    <%= spawn.min_time_mins %> мин.
+                <% else %>
+                    <%= spawn.max_time_mins %> ~
+                    <%= spawn.min_time_mins %> мин.
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <div class="norecords">Монстр нигде не водится.</div>
+  <% end %>
+</div>
+<%= render 'shared/disqus' %>

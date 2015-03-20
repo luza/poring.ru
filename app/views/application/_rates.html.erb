@@ -1,0 +1,39 @@
+<div class="rates">
+  Рейты: &times;<span class="rates-base"><%= base_rate %></span>/&times;<span class="rates-job"><%= job_rate %></span>/&times;<span class="rates-drop"><%= drop_rate %></span> |
+  <%= is_renewal ? 'Renewal' : 'Pre-renewal' %>
+</div>
+<div class="rates-popover-content">
+  <div class="rates-popover-wrapper">
+    <div class="ratebox">
+      <label class="label" for="ratebox-base">Base</label>
+      <select class="base" id="ratebox-base" data-value="<%= base_rate %>">
+        <% rates_list.each do |rate| %>
+            <option value="<%= rate %>">&times;<%= rate %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="ratebox">
+      <label class="label" for="ratebox-job">Job</label>
+      <select class="job" id="ratebox-job" data-value="<%= job_rate %>">
+        <% rates_list.each do |rate| %>
+            <option value="<%= rate %>">&times;<%= rate %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="ratebox">
+      <label class="label" for="ratebox-drop">Drop</label>
+      <select class="drop" id="ratebox-drop" data-value="<%= drop_rate %>">
+        <% rates_list.each do |rate| %>
+            <option value="<%= rate %>">&times;<%= rate %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="renewal-switch">
+      <input type="radio" id="ratebox-renewal" checked="checked"/>
+      <label for="ratebox-renewal">Pre-renewal</label>
+    </div>
+    <div class="buttons">
+      <button id="rates-apply">Применить</button>
+    </div>
+  </div>
+</div>
