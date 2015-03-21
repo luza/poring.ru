@@ -142,4 +142,7 @@ class Mob < ActiveRecord::Base
     super.order('count DESC')
   end
 
+  def name
+    read_attribute('j-name')
+  end
 end

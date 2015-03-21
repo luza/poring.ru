@@ -6,17 +6,17 @@
       <% @mobs.each_slice((@mobs.count/4.0).ceil) do |mobsSlice| %>
           <div class="div-list-col">
             <% mobsSlice.each_with_index do |mob, idx| %>
-                <% if idx == 0 || mob['j-name'].chars.first != prev_letter %>
+                <% if idx == 0 || mob.name.chars.first != prev_letter %>
                     <div class="div-list-letter">
-                      <%= mob['j-name'].chars.first %>
-                      <% if idx == 0 && mob['j-name'].chars.first == prev_letter %>
+                      <%= mob.name.chars.first %>
+                      <% if idx == 0 && mob.name.chars.first == prev_letter %>
                           <span>(продолжение)</span>
                       <% end %>
                     </div>
                 <% end %>
-                <% prev_letter = mob['j-name'].chars.first %>
+                <% prev_letter = mob.name.chars.first %>
                 <div class="div-list-item <%= mob.mode_dec&Mob::MD_BOSS > 0 ? 'boss' : '' %>">
-                  <a href="/mobs/<%= mob.id %>.html"><%= mob['j-name'] %></a>
+                  <a href="/mobs/<%= mob.id %>.html"><%= mob.name %></a>
                   <span class="mob-lvl"><%= mob.level %></span>
                 </div>
             <% end %>
