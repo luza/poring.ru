@@ -16,8 +16,8 @@
                 <% end %>
                 <% prev_letter = item.title.chars.first %>
                 <div class="div-list-item">
-                  <%= render :partial => 'shared/item_icon', :locals => { :item => item } %>
-                  <%= link_to item.name_with_slot, controller: 'items', action: 'view', id: item.id %>
+                  <div class="ii" style="background-position: -<%= (item.id%100)*24 %>px -<%= (item.id/100).floor*24 %>px;"></div>
+                  <a href="/items/<%= item.id %>.html"><%= item.name_with_slot %></a>
                 </div>
             <% end %>
           </div>

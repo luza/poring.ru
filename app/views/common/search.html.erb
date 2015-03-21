@@ -1,9 +1,9 @@
 <% if @results[:items].present? || @results[:mobs].present? || @results[:maps].present? || @results[:npcs].present? %>
     <% @results[:items].each do |item| %>
         <div class="row">
-          <%= render :partial => 'shared/item_icon', :locals => {:item => item} %>
+          <div class="ii" style="background-position: -<%= (item.id%100)*24 %>px -<%= (item.id/100).floor*24 %>px;"></div>
           <div class="item-title">
-            <%= link_to item.name_with_slot, controller: 'items', action: 'view', id: item.id %>
+            <a href="/items/<%= item.id %>.html"><%= item.name_with_slot %></a>
           </div>
         </div>
     <% end %>
@@ -11,7 +11,7 @@
         <div class="row">
           <div class="ii mob-icon"></div>
           <div class="item-title">
-            <%= link_to mob.name, controller: 'mobs', action: 'view', id: mob.id %>
+            <a href="/mobs/<%= mob.id %>.html"><%= mob.name %></a>
             <span class="subscript"><%= mob.level %></span>
           </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="row">
           <div class="ii map-icon"></div>
           <div class="item-title">
-            <%= link_to map.name, controller: 'maps', action: 'view', id: map.id %>
+            <a href="/maps/<%= map.id %>.html"><%= map.name %></a>
           </div>
         </div>
     <% end %>
@@ -28,8 +28,8 @@
         <div class="row">
           <div class="ii npc-icon"></div>
           <div class="item-title">
-            <%= link_to npc.name, controller: 'npcs', action: 'view', id: npc.id %>
-            <%= link_to npc.map.name, { controller: 'maps', action: 'view', id: npc.map.id, hl_npc: npc.id }, { class: 'subscript' } %>
+            <a href="/npc/<%= npc.id %>.html"><%= npc.name %></a>
+            <a class="subscript" href="/maps/<%= npc.map.id %>.html?hl_npc=<%= npc.id %>"><%= npc.map.name %></a>
           </div>
         </div>
     <% end %>

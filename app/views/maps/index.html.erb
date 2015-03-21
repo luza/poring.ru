@@ -16,7 +16,7 @@
                 <% end %>
                 <% prev_letter = map.name.chars.first %>
                 <div class="div-list-item">
-                  <%= link_to map.name, controller: 'maps', action: 'view', id: map.id %>
+                  <a href="/maps/<%= map.id %>.html"><%= map.name %></a>
                 </div>
             <% end %>
           </div>

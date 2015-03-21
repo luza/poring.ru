@@ -2,4 +2,7 @@
 
 require ::File.expand_path('../config/environment', __FILE__)
 use Rack::Deflater
+if Rails.env.test?
+  use Rack::RubyProf, :path => 'tmp/profile'
+end
 run Rails.application

@@ -163,7 +163,7 @@
         <tbody>
         <% @mob.drops.each do |drop| %>
             <tr>
-              <td><%= render :partial => 'shared/item_icon', :locals => { :item => drop.item } %></td>
+              <td><div class="ii" style="background-position: -<%= (drop.item.id%100)*24 %>px -<%= (drop.item.id/100).floor*24 %>px;"></div></td>
               <td><%= link_to drop.item.name_with_slot, controller: 'items', action: 'view', id: drop.item.id %></td>
               <td class="text-center nowrap">
                 <abbr title="<%= drop_fraction(drop.chance/100.0) %>&times;<%= drop_rate %>">

@@ -16,7 +16,7 @@
                 <% end %>
                 <% prev_letter = mob['j-name'].chars.first %>
                 <div class="div-list-item <%= mob.mode_dec&Mob::MD_BOSS > 0 ? 'boss' : '' %>">
-                  <%= link_to mob['j-name'], controller: 'mobs', action: 'view', id: mob.id %>
+                  <a href="/mobs/<%= mob.id %>.html"><%= mob['j-name'] %></a>
                   <span class="mob-lvl"><%= mob.level %></span>
                 </div>
             <% end %>

@@ -47,7 +47,7 @@
         <tbody>
         <% @npc.shops.each do |shop| %>
             <tr>
-              <td><%= render :partial => 'shared/item_icon', :locals => {:item => shop.item} %></td>
+              <td><div class="ii" style="background-position: -<%= (shop.item.id%100)*24 %>px -<%= (shop.item.id/100).floor*24 %>px;"></div></td>
               <td><%= link_to shop.item.name_with_slot, controller: 'items', action: 'view', id: shop.item.id %></td>
               <td class="text-center"><%= shop.price >= 0 ? shop.price : shop.item.price %> z.</td>
             </tr>
@@ -72,7 +72,7 @@
         <tbody>
         <% @npc.npc_items.each do |npc_item| %>
             <tr>
-              <td><%= render :partial => 'shared/item_icon', :locals => {:item => npc_item.item} %></td>
+              <td><div class="ii" style="background-position: -<%= (npc_item.item.id%100)*24 %>px -<%= (npc_item.item.id/100).floor*24 %>px;"></div></td>
               <td><%= link_to npc_item.item.name_with_slot, controller: 'items', action: 'view', id: npc_item.item.id %></td>
               <td>
                 <% if npc_item.type == 'get' %>
