@@ -13,11 +13,17 @@ class MobsController < ApplicationController
   private
   def apply_filters(mobs)
     filters = params[:filters]
-    initial_filters = { :qty_comp => 'gt', :qty_val => 0 }
+
+    if filters.nil?
+      filters = session[:filters]
+    end
 
     if filters.nil? || filters[:reset]
+      initial_filters = { :qty_comp => 'gt', :qty_val => 0 }
       filters = initial_filters
     end
+
+    session[:filters] = filters
 
     if filled?(filters[:level_val])
       comp = comp2sign(filters[:level_comp])
@@ -125,33 +131,33 @@ class MobsController < ApplicationController
     end
 
     if filled?(filters[:is_moving])
-      flag = filters[:is_moving] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&1 > 0) = ?', flag)
+      flag = filters[:is_moving] == 'yes' ? 0 : 1
+      mobs = mobs.where('mode_dec&1 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_attacking])
-      flag = filters[:is_attacking] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&128 > 0) = ?', flag)
+      flag = filters[:is_attacking] == 'yes' ? 0 : 1
+      mobs = mobs.where('mode_dec&128 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_agressive])
       flag = filters[:is_agressive] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&4 > 0) = ?', flag)
+      mobs = mobs.where('mode_dec&4 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_assist])
       flag = filters[:is_assist] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&8 > 0) == ?', flag)
+      mobs = mobs.where('mode_dec&8 > 0 == ?', flag)
     end
 
     if filled?(filters[:is_detect_cast])
       flag = filters[:is_detect_cast] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&256 > 0) = ?', flag)
+      mobs = mobs.where('mode_dec&256 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_boss])
       flag = filters[:is_boss] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&32 > 0) = ?', flag)
+      mobs = mobs.where('mode_dec&32 > 0 = ?', flag)
     end
 
     if filled?(filters[:qty_val])

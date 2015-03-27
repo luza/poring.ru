@@ -13,11 +13,17 @@ class ItemsController < ApplicationController
   private
   def apply_filters(items)
     filters = params[:filters]
-    initial_filters = {}
+
+    if filters.nil?
+      filters = session[:filters]
+    end
 
     if filters.nil? || filters[:reset]
+      initial_filters = {}
       filters = initial_filters
     end
+
+    session[:filters] = filters
 
     if filled?(filters[:view])
       value = filters[:view].to_i
@@ -80,7 +86,7 @@ class ItemsController < ApplicationController
     if filled?(filters[:weight_val])
       comp = comp2sign(filters[:weight_comp])
       value = filters[:weight_val].to_i
-      items = items.where("weight #{comp} ?", value)
+      items = items.where("weight/10 #{comp} ?", value)
     end
 
     if filled?(filters[:refinable])

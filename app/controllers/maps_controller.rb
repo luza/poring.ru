@@ -20,11 +20,17 @@ class MapsController < ApplicationController
   private
   def apply_filters(maps)
     filters = params[:filters]
-    initial_filters = {:has_mobs => 'yes'}
 
-    if filters.nil? || filters[:reset].present?
+    if filters.nil?
+      filters = session[:filters]
+    end
+
+    if filters.nil? || filters[:reset]
+      initial_filters = {:has_mobs => 'yes'}
       filters = initial_filters
     end
+
+    session[:filters] = filters
 
     if filled?(filters[:has_mobs])
       sign = filters[:has_mobs] == 'yes' ? '>' : '=';
