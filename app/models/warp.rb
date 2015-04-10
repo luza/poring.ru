@@ -1,4 +1,4 @@
-class Warp < ActiveRecord::Base
+class Warp < Common
   self.table_name = 'info_warp'
 
   belongs_to :map

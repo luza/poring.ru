@@ -1,4 +1,4 @@
-class Item < ActiveRecord::Base
+class Item < Common
   self.table_name = 'info_items'
   self.inheritance_column = ''
 
@@ -94,7 +94,7 @@ class Item < ActiveRecord::Base
   end
 
   def jobs
-    jobs_mask = job_dec
+    jobs_mask = job
     job_list = []
     JOB_NAMES.each do |j, name|
       if (j&jobs_mask) == j
@@ -106,6 +106,10 @@ class Item < ActiveRecord::Base
       end
     end
     job_list.join(', ')
+  end
+
+  def job
+    super.to_i
   end
 
   def name_with_slot

@@ -1,6 +1,6 @@
 <div class="rates">
   Рейты: &times;<span class="rates-base"><%= base_rate %></span>/&times;<span class="rates-job"><%= job_rate %></span>/&times;<span class="rates-drop"><%= drop_rate %></span> |
-  <%= is_renewal ? 'Renewal' : 'Pre-renewal' %>
+  <%= renewal? ? 'Renewal' : 'Pre-renewal' %>
 </div>
 <div class="rates-popover-content">
   <div class="rates-popover-wrapper">
@@ -29,8 +29,8 @@
       </select>
     </div>
     <div class="renewal-switch">
-      <input type="radio" id="ratebox-renewal" checked="checked"/>
-      <label for="ratebox-renewal">Pre-renewal</label>
+      <input name="renewal" type="checkbox" id="ratebox-renewal" <% if renewal? %>checked="checked"<% end %> />
+      <label for="ratebox-renewal">Renewal</label>
     </div>
     <div class="buttons">
       <button id="rates-apply">Применить</button>

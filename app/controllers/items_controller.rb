@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
     if filled?(filters[:class])
       adv, class_ = filters[:class].split(',')
       items = items.where(adv.to_i == 1 ? 'upper&2' : '(upper&1 OR upper&4)')
-      items = items.where('job_dec&?', class_.to_i(16)) # from hex to dec
+      items = items.where('job&?', class_.to_i(16)) # from hex to dec
     end
 
     if filled?(filters[:min_level_val])
@@ -121,9 +121,9 @@ class ItemsController < ApplicationController
       when 'cards'
         items.where('type = 6')
       when 'armor'
-        items.where('type = 5')
-      when 'weapon'
         items.where('type = 4')
+      when 'weapon'
+        items.where('type = 5')
       when 'usable'
         items.where("type IN (0, 2, 11, 18) AND `use-script` NOT LIKE '{ pet %; }'")
       when 'ext'

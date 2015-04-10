@@ -1,6 +1,4 @@
 class MobsController < ApplicationController
-  include MobsHelper
-
   def index
     @mobs = Mob.order('`j-name`')
     @mobs, @filters = apply_filters(@mobs)
@@ -132,32 +130,32 @@ class MobsController < ApplicationController
 
     if filled?(filters[:is_moving])
       flag = filters[:is_moving] == 'yes' ? 0 : 1
-      mobs = mobs.where('mode_dec&1 > 0 = ?', flag)
+      mobs = mobs.where('mode&1 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_attacking])
       flag = filters[:is_attacking] == 'yes' ? 0 : 1
-      mobs = mobs.where('mode_dec&128 > 0 = ?', flag)
+      mobs = mobs.where('mode&128 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_agressive])
       flag = filters[:is_agressive] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&4 > 0 = ?', flag)
+      mobs = mobs.where('mode&4 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_assist])
       flag = filters[:is_assist] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&8 > 0 == ?', flag)
+      mobs = mobs.where('mode&8 > 0 == ?', flag)
     end
 
     if filled?(filters[:is_detect_cast])
       flag = filters[:is_detect_cast] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&256 > 0 = ?', flag)
+      mobs = mobs.where('mode&256 > 0 = ?', flag)
     end
 
     if filled?(filters[:is_boss])
       flag = filters[:is_boss] == 'yes' ? 1 : 0
-      mobs = mobs.where('mode_dec&32 > 0 = ?', flag)
+      mobs = mobs.where('mode&32 > 0 = ?', flag)
     end
 
     if filled?(filters[:qty_val])

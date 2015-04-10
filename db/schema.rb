@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "mob_id",  limit: 10, default: 0, null: false
     t.integer "item_id", limit: 10, default: 0, null: false
     t.integer "chance",  limit: 10, default: 0, null: false
-    t.integer "renewal", limit: 1,  default: 0, null: false
   end
 
   add_index "info_drop", ["id"], name: "sqlite_autoindex_info_drop_1", unique: true
@@ -44,8 +43,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string  "use-script",     limit: 255,               null: false
     t.string  "equip-script",   limit: 255,               null: false
     t.string  "unequip-script", limit: 255,               null: false
-    t.integer "renewal",        limit: 1,   default: 0,   null: false
-    t.integer "job_dec",        limit: 10,  default: 0,   null: false
   end
 
   add_index "info_items", ["id"], name: "sqlite_autoindex_info_items_1", unique: true
@@ -64,8 +61,8 @@ ActiveRecord::Schema.define(version: 0) do
   add_index "info_maps", ["name"], name: "info_maps_name"
 
   create_table "info_mapsizes", primary_key: "name", force: :cascade do |t|
-    t.integer "width"
-    t.integer "height"
+    t.integer "width",  limit: 11
+    t.integer "height", limit: 11
   end
 
   add_index "info_mapsizes", ["name"], name: "sqlite_autoindex_info_mapsizes_1", unique: true
@@ -103,8 +100,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "mexp",        limit: 11,              null: false
     t.integer "exp-per",     limit: 11,              null: false
     t.integer "qty",         limit: 11,              null: false
-    t.integer "renewal",     limit: 1,   default: 0, null: false
-    t.integer "mode_dec"
   end
 
   add_index "info_mobs", ["id"], name: "sqlite_autoindex_info_mobs_1", unique: true

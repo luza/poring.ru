@@ -1,4 +1,4 @@
-class Mob < ActiveRecord::Base
+class Mob < Common
   self.table_name = 'info_mobs'
 
   has_many :drops
@@ -144,5 +144,9 @@ class Mob < ActiveRecord::Base
 
   def name
     read_attribute('j-name')
+  end
+
+  def mode
+    super.to_i
   end
 end

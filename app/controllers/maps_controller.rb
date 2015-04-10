@@ -1,6 +1,4 @@
 class MapsController < ApplicationController
-  include MapsHelper
-
   def index
     @maps = Map.order('name')
     @maps, @filters = apply_filters(@maps)

@@ -10,7 +10,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="common-wrapper">
+    <div class="common-wrapper <%= renewal? ? 'renewal' : '' %>">
       <header class="common-header">
         <div class="common-top-spacer">
           <%= render 'rates' %>

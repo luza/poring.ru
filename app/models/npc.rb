@@ -1,4 +1,4 @@
-class Npc < ActiveRecord::Base
+class Npc < Common
   self.table_name = 'info_npc'
 
   has_many :npc_items

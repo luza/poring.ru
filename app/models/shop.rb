@@ -1,4 +1,4 @@
-class Shop < ActiveRecord::Base
+class Shop < Common
   self.table_name = 'info_shops'
 
   belongs_to :npc

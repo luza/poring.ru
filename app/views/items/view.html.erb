@@ -8,7 +8,7 @@
     <% if @item.type == 6 %>
         <img src="/images/cards/<%= @item.id %>.gif" alt="<%= @item.title %>"/>
     <% else %>
-        <img src="/images/items/<%= @item.id %>.png" alt="<%= @item.title %>"/>
+        <img src="/images/large/<%= @item.id %>.gif" alt="<%= @item.title %>"/>
     <% end %>
   </div>
   <div class="attributes">
@@ -16,7 +16,7 @@
       <span class="lbl">ID:</span>
       <span class="value"><%= @item.id %></span>
     </div>
-    <% if @item.type == 4 && @item.atk.present? %>
+    <% if @item.type == 5 && @item.atk.present? %>
         <div class="row">
           <span class="lbl">Атака:</span>
           <span class="value"><%= @item.atk %></span>
@@ -28,13 +28,13 @@
           <span class="value"><%= @item.def %></span>
         </div>
     <% end %>
-    <% if @item.type == 4 && @item.range.present? %>
+    <% if @item.type == 5 && @item.range.present? %>
         <div class="row">
           <span class="lbl">Дальность:</span>
           <span class="value"><%= @item.range %></span>
         </div>
     <% end %>
-    <% if @item.type == 4 && @item['wLV'].present? %>
+    <% if @item.type == 5 && @item['wLV'].present? %>
         <div class="row">
           <span class="lbl">Уровень:</span>
         <span class="value">

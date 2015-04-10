@@ -1,4 +1,4 @@
-class ItemDesc < ActiveRecord::Base
+class ItemDesc < Common
   self.table_name = 'info_itemsdesc'
 
   def desc

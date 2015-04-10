@@ -24,6 +24,16 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f35582', endColorstr='#f35582',GradientType=0 ); /* IE6-9 */
 }
 
+.renewal .menu .menu-item {
+  background: #1e5799; /* Old browsers */
+  background: -moz-linear-gradient(top,  #1e5799 0%, #0677d3 33%, #0677d3 33%, #1e5799 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(33%,#0677d3), color-stop(33%,#0677d3), color-stop(100%,#1e5799)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* W3C */
+}
+
 .menu .menu-item a {
     height: 34px;
     color: white;
@@ -36,6 +46,16 @@
     background: -ms-linear-gradient(top,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #1e5799 0%,#0677d3 33%,#0677d3 33%,#1e5799 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */
+}
+
+.renewal .menu .menu-item a {
+  background: #f35582; /* Old browsers */
+  background: -moz-linear-gradient(top,  #f35582 0%, #fc71a4 33%, #f35582 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f35582), color-stop(33%,#fc71a4), color-stop(100%,#f35582)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #f35582 0%,#fc71a4 33%,#f35582 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #f35582 0%,#fc71a4 33%,#f35582 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #f35582 0%,#fc71a4 33%,#f35582 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #f35582 0%,#fc71a4 33%,#f35582 100%); /* W3C */
 }
 
 .menu .menu-item a:hover {

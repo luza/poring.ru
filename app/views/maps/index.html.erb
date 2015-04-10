@@ -6,15 +6,17 @@
       <% @maps.each_slice((@maps.count/4.0).ceil) do |mapsSlice| %>
           <div class="div-list-col">
             <% mapsSlice.each_with_index do |map, idx| %>
-                <% if idx == 0 || map.name.chars.first != prev_letter %>
+                <% letter = map.name.chars.first.upcase %>
+                <% letter = ('A'..'Z').include?(letter) ? letter : '#' %>
+                <% if idx == 0 || letter != prev_letter %>
                     <div class="div-list-letter">
-                      <%= map.name.chars.first.upcase %>
-                      <% if idx == 0 && map.name.chars.first == prev_letter %>
+                      <%= letter %>
+                      <% if idx == 0 && letter == prev_letter %>
                           <span>(продолжение)</span>
                       <% end %>
                     </div>
                 <% end %>
-                <% prev_letter = map.name.chars.first %>
+                <% prev_letter = letter %>
                 <div class="div-list-item">
                   <a href="/maps/<%= map.id %>.html"><%= map.name %></a>
                 </div>

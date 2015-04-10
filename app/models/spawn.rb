@@ -1,4 +1,4 @@
-class Spawn < ActiveRecord::Base
+class Spawn < Common
   self.table_name = 'info_spawn'
 
   belongs_to :mob

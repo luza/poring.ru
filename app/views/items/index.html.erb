@@ -6,15 +6,17 @@
       <% @items.each_slice((@items.count/4.0).ceil) do |itemsSlice| %>
           <div class="div-list-col">
             <% itemsSlice.each_with_index do |item, idx| %>
-                <% if idx == 0 || item.title.chars.first != prev_letter %>
+                <% letter = item.title.chars.first.upcase %>
+                <% letter = ('A'..'Z').include?(letter) ? letter : '#' %>
+                <% if idx == 0 || letter != prev_letter %>
                     <div class="div-list-letter">
-                      <%= item.title.chars.first %>
-                      <% if idx == 0 && item.title.chars.first == prev_letter %>
+                      <%= letter %>
+                      <% if idx == 0 && letter == prev_letter %>
                           <span>(продолжение)</span>
                       <% end %>
                     </div>
                 <% end %>
-                <% prev_letter = item.title.chars.first %>
+                <% prev_letter = letter %>
                 <div class="div-list-item">
                   <div class="ii" style="background-position: -<%= (item.id%100)*24 %>px -<%= (item.id/100).floor*24 %>px;"></div>
                   <a href="/items/<%= item.id %>.html"><%= item.name_with_slot %></a>

@@ -23,8 +23,8 @@ module MobsHelper
     [chance * drop_rate, 100].min
   end
 
-  def is_renewal
-    false
+  def renewal?
+    (cookies[:is_renewal].to_i > 0)
   end
 
   def drop_fraction(val)

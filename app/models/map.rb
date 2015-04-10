@@ -1,4 +1,4 @@
-class Map < ActiveRecord::Base
+class Map < Common
   self.table_name = 'info_maps'
 
   has_many :warps
