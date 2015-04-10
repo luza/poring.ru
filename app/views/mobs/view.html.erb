@@ -195,16 +195,7 @@
             <tr>
               <td><%= link_to spawn.map.name, controller: 'maps', action: 'view', id: spawn.map.id %></td>
               <td class="text-center"><%= spawn.count %></td>
-              <td class="text-center nowrap">
-                <% if spawn['max-time'] == 0 %>
-                    Сразу
-                <% elsif spawn['min-time'] == spawn['max-time'] %>
-                    <%= spawn.min_time_mins %> мин.
-                <% else %>
-                    <%= spawn.max_time_mins %> ~
-                    <%= spawn.min_time_mins %> мин.
-                <% end %>
-              </td>
+              <td class="text-center nowrap"><%= spawn.time %></td>
             </tr>
         <% end %>
         </tbody>

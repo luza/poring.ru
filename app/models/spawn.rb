@@ -4,14 +4,24 @@ class Spawn < Common
   belongs_to :mob
   belongs_to :map
 
-  # return integer if that is a whole number
-  def min_time_mins
-    val = (self['min-time']/1000.0/60.0)
-    val.to_i == val ? val.to_i : val.round(1)
+  def time
+    if self['max-time'] == 0
+      'Сразу'
+    elsif self['min-time'] == self['max-time']
+      delay.to_s + ' мин.'
+    else
+      delay.to_s + ' ~ ' + (delay + variance).to_s + ' мин.'
+    end
   end
 
-  def max_time_mins
-    val = (self['max-time']/1000.0/60.0).round(1)
-    val.to_i == val ? val.to_i : val.round(1)
+  private
+  # return integer if that is a whole number
+  def delay
+    val = (self['min-time']/1000.0/60.0)
+    val < 1 ? val.round(1) : val.round
+  end
+
+  def variance
+    (self['max-time']/1000.0/60.0).round
   end
 end
